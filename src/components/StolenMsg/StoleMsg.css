@@ -1,0 +1,11 @@
+form {
+    width: 350px;
+    text-align: center;
+    display: flex;
+}
+
+.msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

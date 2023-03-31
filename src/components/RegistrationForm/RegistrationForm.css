@@ -1,0 +1,30 @@
+.reg {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.regnon {
+    display: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    background-color: black;
+    color: white;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    align-self: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sucsess {
+    background-color: blue;
+    display: none;
+}

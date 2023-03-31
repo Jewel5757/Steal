@@ -1,0 +1,17 @@
+table {
+    border: 1px solid black;
+}
+
+thead {
+    background-color: rgb(80, 24, 77);
+    color: white;
+}
+
+tr {
+    border: 1px solid black;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+}
