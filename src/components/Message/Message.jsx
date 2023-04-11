@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import './StoleMsg.css';
+import './Message.css';
+import { useEffect } from 'react';
 
-
-function StoleMsg(props) {
+function Message(props) {
+  const [status, setStatus] = useState('');
   const [licenseNumber, setLicenseNumber] = useState('');
   const [type, setType] = useState('');
   const [ownerFullName, setOwnerFullName] = useState('');
@@ -11,10 +12,12 @@ function StoleMsg(props) {
   const [updatedAt] = useState('');
   const [color, setColor] = useState('');
   const [date, setDate] = useState('');
-  const [officer] = useState('');
+  const [officer, setOfficer] = useState('');
   const [description, setDescription] = useState('');
   const [resolution] = useState('');
   const [isSend, setIsSend] = useState(false);
+  const [items, setItems] = useState('');
+
 
   
   const handleSubmit = (event) => {
@@ -35,7 +38,9 @@ function StoleMsg(props) {
       resolution,
     };
 
-    fetch('https://sf-final-project-be.herokuapp.com/api/public/report', {
+
+
+    fetch('https://sf-final-project-be.herokuapp.com/api/cases/', {
       method: 'POST', 
       body: JSON.stringify(data),
       headers: {
@@ -51,25 +56,56 @@ function StoleMsg(props) {
     .catch(error => console.error(error));
   }
 
+  //сотрудники
+  useEffect(() => {
+  let myHeaders = new Headers();
+  myHeaders.append(
+    "Authorization",
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzU4ODExZDE5ODcwNDg1NWE3YjQyMCIsImlhdCI6MTY4MTIzMDExMCwiZXhwIjoxNjgxODM0OTEwfQ.0b81G-yJJmZK6rXTQ13ifFN5nBQSOu7tvIfdrZeMYD8"
+  );
+  let requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  fetch("https://sf-final-project-be.herokuapp.com/api/officers/", requestOptions)
+  .then((result) => {
+    console.log("Response status:", result.status);
+    return result.json();
+  })
+  .then(
+    (result) => {
+      console.log("Data:", result.officers);
+      const officersEmail = result.officers
+      .filter((officer) => officer.approved)
+      .map((officer) => officer._id);
+      setItems(officersEmail); 
+  })
+},[]);
+
+
   if (isSend) {
     return (
-    <div className='send'>
+    <div className='regSucsess'>
     <p>Ваше сообщение отправлено</p>
     </div>
     )
   }
- 
+
   return (
     <div className= 'msg'>
     <form onSubmit={handleSubmit}>
+    <label>
+        Статус:
+      </label>
+      <select value={status} onChange={e => setStatus(e.target.value)}>
+        <option>new</option>
+      </select>
       <label>
         Номер лицензии
       </label>
         <input type="text" value={licenseNumber} onChange={e => setLicenseNumber(e.target.value)} />
-        <label>
-        Client ID:
-      </label>
-        <input type="text" value={clientId} onChange={e => setClientId(e.target.value)} />
       <label>
         Тип велосипеда
       </label>
@@ -82,6 +118,7 @@ function StoleMsg(props) {
         ФИО пользователя 
       </label>
         <input type="text" value={ownerFullName} onChange={e => setOwnerFullName(e.target.value)} />
+       
       <label>
        Цвет велосипеда
       </label>
@@ -90,6 +127,16 @@ function StoleMsg(props) {
         Дата кражи
       </label>
         <input type="date" value={date} onChange={e => setDate(e.target.value)} />
+      <label>
+        Ответственный сотрудник
+      </label>
+      <select value={officer} onChange={e => setOfficer(e.target.value)}>
+        <option>Выберите ответственного сотрудника</option>
+        { items &&
+          items.length > 0 &&
+          items.map((item, index) => <option key={index} value={item}>{item}
+        </option>)}
+      </select>
       <label>
         Дополнительная информация
       </label>
@@ -100,5 +147,4 @@ function StoleMsg(props) {
   );
 }
 
-
-export default StoleMsg;
+export default Message;

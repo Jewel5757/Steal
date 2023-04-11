@@ -1,9 +1,18 @@
-table {
-    border: 1px solid black;
+.cases {
+    flex: 1 0 auto;
+    background: -webkit-linear-gradient(143deg, #fff700,#cbc14d,#000000);                     
+    background: linear-gradient(143deg, #fff700,#867f33,#000000);  
 }
 
+table {
+    border: 1px solid black;
+    padding-top: 10px;
+    background-color: rgba(255, 255, 255,.1);
+}
+
+
 thead {
-    background-color: rgb(80, 24, 77);
+    background-color: #1b1a1a;
     color: white;
 }
 
@@ -14,4 +23,21 @@ tr {
 .table {
     display: flex;
     flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+@media screen and (max-width: 1100px) {
+
+    table {
+        font-size: 14px;
+    }
+    td{
+        max-width: 30px;
+        word-break: break-all;
+     }
 }

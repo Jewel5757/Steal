@@ -1,53 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ body {
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;                                                                                                                           
+    background: -webkit-linear-gradient(143deg, #fff700,#cbc14d,#000000);                     
+    background: linear-gradient(143deg, #fff700,#867f33,#000000);                                    
+ }
+
+ #root {
+  height: 100%;
+ }
+
 .App {
   text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
-  background-color: rgba(253, 244, 239, 1);
+  background-color: #1b1a1a;
   height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  font-family: 'Montserrat', sans-serif;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-.main {
-  background-image: url('../public/velik.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: calc(100vh - 150px);
+.App-footer {
+  background-color: #1b1a1a;
+  flex: 0 0 auto;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 50px;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.main p {
-  max-width: 708px;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

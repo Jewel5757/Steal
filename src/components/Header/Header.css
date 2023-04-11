@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600&display=swap');
 
-.App-header {
- display: flex;
- flex-direction: row;
- justify-content: space-between;
- font-family: 'Montserrat', sans-serif;
-}
 
 nav {
     display: flex;
@@ -13,7 +7,71 @@ nav {
 
 nav a {
     text-decoration: none;
-    font-size: 20px;
-    color: black;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
     padding: 10px;
+    align-self: center;
 }
+
+nav a:hover {
+    color:  yellow;
+}
+
+.loggined {
+    color: white;
+    font-size: 20px;
+    text-align: right;
+    justify-self: end;
+    height: 70px;
+    display: flex;
+}
+
+.loggined button {
+    align-self: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.loginBtn {
+    background-color: rgb(245, 241, 6);
+    color: black;
+}
+
+.loginBtn:hover {
+    background-color: rgb(137, 6, 245);
+}
+
+.mobile {
+    display: flex;
+    background-color: #1b1a1a;
+    flex-direction: column;
+    line-height: 20px;
+    align-items: flex-start;
+    padding-left: 10px;
+}
+
+.mobile a {
+    color: white;
+}
+
+.mobile  a:hover {
+    color:  yellow;
+}
+
+.b {
+    width: 30px;
+    height: 2px;
+    background-color: #ffee00;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    transition: 0.3s;
+    align-self: center;
+}
+
+.burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+

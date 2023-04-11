@@ -1,0 +1,10 @@
+@media screen and (max-width: 1100px) {
+
+    table {
+        font-size: 14px;
+    }
+    td{
+        max-width: 30px;
+        word-break: break-all;
+     }
+}

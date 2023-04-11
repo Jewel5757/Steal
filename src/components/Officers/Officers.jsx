@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import "./StealCases.css";
+import '../StealCases/StealCases.css'
 import { Link } from "react-router-dom";
-import "../DetailSteal/DetailSteal"
+import "../DetailOfficers/DetailOfficers"
 
-
-export default class StealCases extends Component {
+export default class Officers extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +12,6 @@ export default class StealCases extends Component {
       items: [],
     };
   }
-
   
   componentDidMount() {
     let myHeaders = new Headers();
@@ -27,15 +25,16 @@ export default class StealCases extends Component {
       redirect: "follow",
     };
 
-    fetch("https://sf-final-project-be.herokuapp.com/api/cases/", requestOptions)
+    fetch("https://sf-final-project-be.herokuapp.com/api/officers/", requestOptions)
       .then((result) => {
+        console.log("Response status:", result.status);
         return result.json();
       })
       .then(
         (result) => {
           this.setState({
             isLoaded: true,
-            items: result.data,
+            items: result.officers,
           });
         },
         (error) => {
@@ -44,14 +43,11 @@ export default class StealCases extends Component {
           });
         }
       );
-      
   }
 
   handleItemClick = (itemId) => {
-    window.location.href = `/cases1/${itemId}`;
+    window.location.href = `/officers/${itemId}`;
   };
-
-
 
   render() {
     const { error, isLoaded, items } = this.state;
@@ -66,13 +62,12 @@ export default class StealCases extends Component {
         items.map(function (item) {
           return (
             <tr key={item._id} >
-               <td><Link to={`/cases/${item._id}`} key={item._id}>
-              {item._id}
+                <td><Link to={`/officers/${item._id}`} key={item._id}>
+              {item.email}
                </Link></td>
-              <td>{item.status}</td>
-              <td>{item.licenseNumber}</td>
-              <td>{item.ownerFullName}</td>
-              <td>{new Date(item.createdAt).toLocaleDateString("en-GB")}</td>
+              <td>{item.firstName}</td>
+              <td>{item.lastName}</td>
+              <td>{item.approved? "одобрен" : "не одобрен" }</td>
             </tr>
       
           );
@@ -84,16 +79,14 @@ export default class StealCases extends Component {
           <table>
             <thead>
               <tr>
-                <td>ID</td>
-                <td>Статус</td>
-                <td>Лицензия</td>
-                <td>ФИО</td>
-                <td>Дата</td>
+                <td>Email</td>
+                <td>Имя</td>
+                <td>Фамилия</td>
+                <td>Статус одобрения</td>
               </tr>
             </thead>
             <tbody>{restd}</tbody>
           </table>
-       
         </div>
         </div>
       );

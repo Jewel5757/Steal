@@ -1,0 +1,23 @@
+.detail {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 0 auto;
+    background: -webkit-linear-gradient(143deg, #fff700,#cbc14d,#000000);                     
+    background: linear-gradient(143deg, #fff700,#867f33,#000000);          
+}
+
+.detailInner {
+    background-color: transparent;
+    border: 1px solid #60079b;
+    line-height: 24px;
+    max-width: 500px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.stealDel {
+    flex: 1 0 auto;
+    padding-top: 30px;
+}

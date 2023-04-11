@@ -8,10 +8,9 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1 0 auto;
+    padding-top: 30px;
 }
 
-.send {
-    padding-top: 30px;
-    flex: 1 0 auto;
+form {
+    max-width: 320px;
 }
