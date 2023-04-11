@@ -43,11 +43,32 @@ function StoleMsg(props) {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzU4ODExZDE5ODcwNDg1NWE3YjQyMCIsImlhdCI6MTY4MTIzMDExMCwiZXhwIjoxNjgxODM0OTEwfQ.0b81G-yJJmZK6rXTQ13ifFN5nBQSOu7tvIfdrZeMYD8",
       }
     })
-    .then(response =>{
-      response.json()
-      setIsSend(true)
-      console.log("Response status:", response.status);
+
+    .then(function(response) {
+      if (response.status == 400 && !licenseNumber) {
+        alert('Вы не ввели номер лицензии');
+        return;
+      } else if (response.status == 400 && !clientId) {
+        alert('Вы не ввели ClientId');
+        return;
+      } else if (response.status == 400 && !ownerFullName) {
+        alert('Вы не ввели ФИО');
+        return;
+      } else if (response.status == 400 && !type) {
+        alert('Вы не ввели тип');
+        return;
+      } else if (response.status !== 200) {
+        alert('Что-то пошло не так, ошибка:' + response.status);
+        return;
+      } 
+
+      response.json().then(function(data) {
+        alert('Сообщение отправлено');
+  
+        setIsSend(true)
+      });
     })
+
     .catch(error => console.error(error));
   }
 
@@ -65,15 +86,15 @@ function StoleMsg(props) {
       <label>
         Номер лицензии
       </label>
-        <input type="text" value={licenseNumber} onChange={e => setLicenseNumber(e.target.value)} />
+        <input type="text" value={licenseNumber} className={licenseNumber.length ? '' : 'error'}  onChange={e => setLicenseNumber(e.target.value)} />
         <label>
         Client ID:
       </label>
-        <input type="text" value={clientId} onChange={e => setClientId(e.target.value)} />
+        <input type="text" value={clientId} className={clientId.length ? '' : 'error'} onChange={e => setClientId(e.target.value)} />
       <label>
         Тип велосипеда
       </label>
-        <select value={type} onChange={e => setType(e.target.value)}>
+        <select value={type} className={type.length ? '' : 'error'}  onChange={e => setType(e.target.value)}>
         <option>Выберите тип</option>
          <option>general</option>
          <option>sport</option>
@@ -81,7 +102,7 @@ function StoleMsg(props) {
       <label>
         ФИО пользователя 
       </label>
-        <input type="text" value={ownerFullName} onChange={e => setOwnerFullName(e.target.value)} />
+        <input type="text" value={ownerFullName} className={ownerFullName.length ? '' : 'error'} onChange={e => setOwnerFullName(e.target.value)} />
       <label>
        Цвет велосипеда
       </label>

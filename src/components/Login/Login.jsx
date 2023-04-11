@@ -76,11 +76,11 @@ const {
               <label>
                 Email:
               </label>
-              <input type="email" value={email} onChange={handleEmailChange} />
+              <input type="email" className={email.length ? '' : 'error'} value={email} onChange={handleEmailChange} />
               <label>
                 Пароль:
               </label>
-              <input type="password" value={password} onChange={handlePasswordChange} />
+              <input type="password" className={password.length ? '' : 'error'} value={password} onChange={handlePasswordChange} />
               <button type="submit">Вход</button>
             </form>
           </div>

@@ -16,7 +16,6 @@ function RegistrationForm() {
     const { name, value } = event.target;
     setUser(prevUser => ({ ...prevUser, [name]: value }));
   };
-
   let flag = true;
 
 
@@ -29,6 +28,7 @@ function RegistrationForm() {
       user.approved = false;
     }
   
+    const errorIn = document.querySelector('.err')
     fetch('https://sf-final-project-be.herokuapp.com/api/auth/sign_up', {
       method: 'POST',
       body: JSON.stringify(user),
@@ -37,11 +37,19 @@ function RegistrationForm() {
       }
     })
       .then(function(response) {
-        if (response.status !== 200) {
-          alert('Looks like there was a problem. Status Code: ' +
-            response.status);
+        if (response.status == 400 && !user.clientId) {
+          alert('Вы не ввели ClientId');
           return;
-        }
+        } else if (response.status == 400 && !user.email) {
+          alert('Вы не ввели email');
+          return;
+        } else if (response.status == 400 && !user.password) {
+          alert('Вы не ввели пароль');
+          return;
+        } else if (response.status !== 200) {
+          alert('Что-то пошло не так, ошибка:' + response.status);
+          return;
+        } 
   
         response.json().then(function(data) {
           alert('Вы успешно зарегистрированы');
@@ -79,6 +87,7 @@ function RegistrationForm() {
       </label>
         <input
           type="email"
+          className={user.email.length ? '' : 'error'}
           name="email"
           value={user.email}
           onChange={handleInputChange}
@@ -107,6 +116,7 @@ function RegistrationForm() {
         <input
           type="password"
           name="password"
+          className={user.password.length ? '' : 'error'}
           value={user.password}
           onChange={handleInputChange}
         />
@@ -116,6 +126,7 @@ function RegistrationForm() {
         <input
           type="text"
           name="clientId"
+          className={user.clientId.length ? '' : 'error'}
           value={user.clientId}
           onChange={handleInputChange}
         />

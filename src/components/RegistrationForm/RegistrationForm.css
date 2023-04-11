@@ -45,6 +45,10 @@ border: none;
 }
 
 
+  .error {
+    border-width: 2px;
+    border-color: red;
+  }
 
 
 .test2 {
